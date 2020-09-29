@@ -20,6 +20,11 @@ default: &default
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: <%= ENV.fetch('PG_HOST') { Rails.application.credentials[:pg][:host] } %>
+  port: <%= ENV.fetch('PG_PORT') { Rails.application.credentials[:pg][:port] } %>
+  database: <%= ENV.fetch('PG_DATABASE') { Rails.application.credentials[:pg][:database] } %>
+  username: <%= ENV.fetch('PG_USERNAME') { Rails.application.credentials[:pg][:username] } %>
+  password: <%= ENV.fetch('PG_PASSWORD') { Rails.application.credentials[:pg][:password] } %>
 
 development:
   <<: *default
@@ -86,8 +91,3 @@ production:
 
 github:
   <<: *default
-  host: <%= ENV.fetch('PG_HOST') { Rails.application.credentials[:pg][:host] } %>
-  port: <%= ENV.fetch('PG_PORT') { Rails.application.credentials[:pg][:port] } %>
-  database: <%= ENV.fetch('PG_DATABASE') { Rails.application.credentials[:pg][:database] } %>
-  username: <%= ENV.fetch('PG_USERNAME') { Rails.application.credentials[:pg][:username] } %>
-  password: <%= ENV.fetch('PG_PASSWORD') { Rails.application.credentials[:pg][:password] } %>
