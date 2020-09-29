@@ -1,11 +1,11 @@
-class PureWorker
+class CreateUserWorker
   include Sidekiq::Worker
   include TimeElapsable
 
   def perform(id)
     @id = id
     record_first
-    DoSomething.execute(self.class)
+    User.create_random
     record_current
   end
 end
